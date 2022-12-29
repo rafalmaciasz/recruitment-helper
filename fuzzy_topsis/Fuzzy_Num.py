@@ -11,7 +11,7 @@ class Fuzzy_Numb:
         return
             distance between two trangular fuzzy numbers 
         """
-        return np.sqrt(1/3*[(self.a-other.a)**2+(self.b-other.b)**2+(self.c-other.c)**2])
+        return np.sqrt(1/3*((self.a-other.a)**2+(self.b-other.b)**2+(self.c-other.c)**2))
 
     def normalised_benefit_criteria(self, c_star):
         """
@@ -25,10 +25,10 @@ class Fuzzy_Numb:
         return 
             normalized over cost criteria triangular fuzzy number
         """
-        return Fuzzy_Numb(a_minus/self.a,a_minus/self.b,a_minus/self.c)
+        return Fuzzy_Numb(a_minus/self.c,a_minus/self.b,a_minus/self.a)
     
     def __mul__(self,other):
-        return Fuzzy_Numb(self.a*other.a, self.b*other.b, self.b*other.b)
+        return Fuzzy_Numb(self.a*other.a, self.b*other.b, self.c*other.c)
 
     def __gt__(self,other):
         if self.c>other.c:
@@ -57,4 +57,6 @@ class Fuzzy_Numb:
             return True
         else:
             return False
-        
+    
+    def __repr__(self):
+        return f"({self.a:.3f},{self.b:.3f},{self.c:.3f})"

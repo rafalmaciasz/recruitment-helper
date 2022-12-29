@@ -11,7 +11,7 @@ def normalize(fuz_num : Fuzzy_Numb, j, max_cols : List[float], min_cols : List[f
 def cc(d_minus : np.array,d_star : np.array):
     ## step 7 and 8
     cc_i=[(i,d_minus[i]/(d_minus[i]+d_star[i])) for i in range(len(d_minus))]
-    cc_i.sort(key=lambda x: x[1])
+    cc_i.sort(key=lambda x: x[1],reverse=True)
     return cc_i
 
 def max_fuzz(V : List[Fuzzy_Numb]):
@@ -22,7 +22,7 @@ def max_fuzz(V : List[Fuzzy_Numb]):
     return max_fuz
 
 def min_fuzz(V : List[Fuzzy_Numb]):
-    min_fuz = Fuzzy_Numb(-np.inf,-np.inf,-np.inf)
+    min_fuz = Fuzzy_Numb(np.inf, np.inf, np.inf)
     for i in range(len(V)):
         if V[i]<min_fuz:
             min_fuz = V[i]
@@ -30,17 +30,17 @@ def min_fuzz(V : List[Fuzzy_Numb]):
 
 def fuzzy_topsis_(decision_matrix : np.ndarray, weights : List[Fuzzy_Numb], cost_ : List[str]):
     ## step 3
-    max_cols = [max(list(decision_matrix[:,i]),key = lambda x: x.c).c for i in range(decision_matrix)]
-    min_cols = [min(list(decision_matrix[:,i]),key = lambda x: x.a).a for i in range(decision_matrix)]
+    max_cols = [max(list(decision_matrix[:,i]),key = lambda x: x.c).c for i in range(len(decision_matrix[0]))]
+    min_cols = [min(list(decision_matrix[:,i]),key = lambda x: x.a).a for i in range(len(decision_matrix[0]))]
     r : List[List[Fuzzy_Numb]] = [[normalize(decision_matrix[i,j],j,max_cols,min_cols,cost_) for j in range(len(decision_matrix[0]))] for i in range(len(decision_matrix))]
     ## step 4
-    V : List[List[Fuzzy_Numb]] = [[r[i,j]*weights[j] for j in range(len(r[0]))] for i in range(len(r))]
+    V : List[List[Fuzzy_Numb]] = [[r[i][j]*weights[j] for j in range(len(r[0]))] for i in range(len(r))]
     ## step 5 compute ideal solution
-    A_ideal = [max_fuzz(V[:][i]) for i in range(V)]
-    A_antyideal = [min_fuzz(V[:][i]) for i in range(V)]
+    A_ideal = [max_fuzz(np.array(V)[:,i]) for i in range(len(V[0]))]
+    A_antyideal = [min_fuzz(np.array(V)[:,i]) for i in range(len(V[0]))]
     ## step 6
-    D_star : List[List[Fuzzy_Numb]] = [np.sum(np.array([V[i][j].d(A_ideal) for j in range(len(V[0]))])) for i in range(len(V))]
-    D_minus : List[List[Fuzzy_Numb]] = [np.sum(np.array([V[i][j].d(A_antyideal) for j in range(len(V[0]))])) for i in range(len(V))]
+    D_star : List[List[Fuzzy_Numb]] = [np.sum(np.array([V[i][j].d(A_ideal[j]) for j in range(len(V[0]))])) for i in range(len(V))]
+    D_minus : List[List[Fuzzy_Numb]] = [np.sum(np.array([V[i][j].d(A_antyideal[j]) for j in range(len(V[0]))])) for i in range(len(V))]
     ## step 7
     return cc(np.array(D_minus),np.array(D_star))
 
