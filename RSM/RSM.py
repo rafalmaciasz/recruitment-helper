@@ -1,7 +1,7 @@
 from typing import List,Callable
 from nzd_zd import zdominowane
 import numpy as np
-from waga_metryka import wage,metric
+from wage_metric import wage,metric
 
 
 def RSM(A : List[List[float]], C :  List[List[float]],min_max_criterial_funct : List[Callable[[np.ndarray],float]],metr = None):
@@ -43,5 +43,4 @@ def RSM(A : List[List[float]], C :  List[List[float]],min_max_criterial_funct : 
     lst = list(zip(*lst))[0]
     
     return lst_skoring,lst
-
 

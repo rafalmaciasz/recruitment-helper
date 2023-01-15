@@ -1,5 +1,5 @@
 import numpy as np
-class Fuzzy_Numb:
+class FuzzyNumb:
     def __init__(self, a : float, b : float, c : float) -> None:
         self.a = a
         self.b = b
@@ -18,17 +18,17 @@ class Fuzzy_Numb:
         return 
             normalized over benefit criteria triangular fuzzy number
         """
-        return Fuzzy_Numb(self.a/c_star,self.b/c_star,self.c/c_star)
+        return FuzzyNumb(self.a/c_star,self.b/c_star,self.c/c_star)
 
     def normalised_cost_criteria(self, a_minus):
         """
         return 
             normalized over cost criteria triangular fuzzy number
         """
-        return Fuzzy_Numb(a_minus/self.c,a_minus/self.b,a_minus/self.a)
+        return FuzzyNumb(a_minus/self.c,a_minus/self.b,a_minus/self.a)
     
     def __mul__(self,other):
-        return Fuzzy_Numb(self.a*other.a, self.b*other.b, self.c*other.c)
+        return FuzzyNumb(self.a*other.a, self.b*other.b, self.c*other.c)
 
     def __gt__(self,other):
         if self.c>other.c:
