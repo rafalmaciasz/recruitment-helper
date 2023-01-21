@@ -1,7 +1,7 @@
 import pandas as pd
 
 def select(csv_name: str):
-    db = pd.read_csv(csv_name)
+    db = pd.read_csv(f"./datasets/{csv_name}")
     av_types = ["tech", "hum", "lek", "sci", "ekon", "spo", "sport", "wojs"]
     
     for type in av_types:

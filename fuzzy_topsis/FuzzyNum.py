@@ -1,4 +1,5 @@
 import numpy as np
+
 class FuzzyNumb:
     def __init__(self, a : float, b : float, c : float) -> None:
         self.a = a
@@ -60,3 +61,5 @@ class FuzzyNumb:
     
     def __repr__(self):
         return f"({self.a:.3f},{self.b:.3f},{self.c:.3f})"
+    
+    

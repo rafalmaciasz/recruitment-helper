@@ -1,13 +1,13 @@
 Miasto,Nazwa kierunku,Nazwa uczelni,Procent zdawalności,Ocena absolwentów,Własna ocena sylabusa,Ilość semestrów,Próg rekrutacji,Rodzaj kierunku
-Warszawa,SGH,Szkoła Główna Handlowa,"95,04405362",3,3,6,25.1,ekon
-Gdańsk,Administracja,Uniwersytet Gdański,"97,63274392",2,4,6,70.2,ekon
-Poznań,Jakość i Rozwój Produktu,Uniwersytet Ekonomiczny,"76,5517505",5,4,7,45.5,ekon
-Poznań,Informatyka i Ekonometria	,Uniwersytet Ekonomiczny,"99,8010219",1,5,6,77.33,ekon
-Katowice,Zarządzanie,Politechnika Śląska,"99,7517914",3,2,6,"48,1",ekon
-Katowice,Finanse i rachunkowość,Uniwersytet Ekonimiczny w Katowicach,"75,7817041",2,4,6,"25,8",ekon
-Katowice,Ekonomia,Uniwersytet Ekonimiczny w Katowicach,"99,2770944",3,3,6,"65,3",ekon
-Katowice,Międzynarodowe stosunki gospodarcze,Uniwersytet Ekonimiczny w Katowicach,"98,1497498",2,5,6,"37,5",ekon
-Katowice,Gospodarka cyfrowa,Uniwersytet Ekonomiczny,"99,1488098",5,4,7,45,ekon
-Łódź,Informatyka,Uniwersytet Łódzki,"92,7524416",5,5,6,"49,1",ekon
-Łódź,Ekonomia,Uniwersytet Łódzki,"97,9596558",4,3,6,"59,9",ekon
-Łódź,Inwestycje i Nieruchomości,Uniwersytet Łódzki,"97,9981399",1,4,6,"67,5",ekon
+Warszawa,SGH,Szkoła Główna Handlowa,95.04405362,3,3,6,25.1,ekon
+Gdańsk,Administracja,Uniwersytet Gdański,97.63274392,2,4,6,70.2,ekon
+Poznań,Jakość i Rozwój Produktu,Uniwersytet Ekonomiczny,76.5517505,5,4,7,45.5,ekon
+Poznań,Informatyka i Ekonometria	,Uniwersytet Ekonomiczny,99.8010219,1,5,6,77.33,ekon
+Katowice,Zarządzanie,Politechnika Śląska,99.7517914,3,2,6,48.1,ekon
+Katowice,Finanse i rachunkowość,Uniwersytet Ekonimiczny w Katowicach,75.7817041,2,4,6,25.8,ekon
+Katowice,Ekonomia,Uniwersytet Ekonimiczny w Katowicach,99.2770944,3,3,6,65.3,ekon
+Katowice,Międzynarodowe stosunki gospodarcze,Uniwersytet Ekonimiczny w Katowicach,98.1497498,2,5,6,37.5,ekon
+Katowice,Gospodarka cyfrowa,Uniwersytet Ekonomiczny,99.1488098,5,4,7,45.0,ekon
+łódź,Informatyka,Uniwersytet łódzki,92.7524416,5,5,6,49.1,ekon
+łódź,Ekonomia,Uniwersytet łódzki,97.9596558,4,3,6,59.9,ekon
+łódź,Inwestycje i Nieruchomości,Uniwersytet łódzki,97.9981399,1,4,6,67.5,ekon
