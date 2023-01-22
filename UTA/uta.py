@@ -86,19 +86,27 @@ def function_value(compartments,max_or_min):
 def get_cmap(n, name='hsv'):
     return plt.cm.get_cmap(name, n)
 
-def plot_f_utility(u,compartments): # u - lista współczynników a i b dla f.użyteczności
+def plot_f_utility(u,compartments,max_or_min): # u - lista współczynników a i b dla f.użyteczności
     cmap = get_cmap(len(u)+1)
-        
+    idx = len(compartments)-1     
     for i in range(len(u)):
         a,b = u[i]
-        x = np.linspace(compartments[i][0],compartments[i+1][0],100)
-        y = a*x+b
-        if i == len(u)-1:
-            plt.scatter(compartments[len(u)][0],a*compartments[len(u)][0]+b, c = 'blue')
-        plt.scatter(compartments[i][0],a*compartments[i][0]+b, c = 'blue')
-        plt.plot(x, y, c =cmap(i))
-        
+        if max_or_min == 1: # maksymalizacja
+            x = np.linspace(compartments[idx-i][0],compartments[idx-i-1][0],100)
+            y = a*x+b
+            if i == len(u)-1:
+                plt.scatter(compartments[0][0],a*compartments[0][0]+b, c = 'blue')
+            plt.scatter(compartments[idx-i][0],a*compartments[idx-i][0]+b, c = 'blue')
+            plt.plot(x, y, c =cmap(i))
 
+        if max_or_min == 0: # minimalizacja
+            x = np.linspace(compartments[i][0],compartments[i+1][0],100)
+            y = a*x+b
+            if i == len(u)-1:
+                plt.scatter(compartments[len(u)][0],a*compartments[len(u)][0]+b, c = 'blue')
+            plt.scatter(compartments[i][0],a*compartments[i][0]+b, c = 'blue')
+            plt.plot(x, y, c =cmap(i))
+        
     plt.grid()
     plt.show()
 
@@ -106,9 +114,7 @@ def rank(utility_coef, compartments, point):
     score = 0  
     for i in range(len(compartments[0])):
         for j in range(len(compartments[i])-1):
-            # a = point[i]
-            # x = compartments[i][j][0]
-            # y = compartments[i][j+1][0]
+            
             if point[i] <= compartments[i][j][0] and point[i] >= compartments[i][j+1][0]:
                 score += utility_coef[i][j][0]*point[i]+utility_coef[i][j][1]
 
