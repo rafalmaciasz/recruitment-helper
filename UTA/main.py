@@ -1,14 +1,14 @@
-from uta import *
+from UTA.uta import *
 import numpy as np
 import pandas as pd 
 pd.options.mode.chained_assignment = None  # default='warn'
 import matplotlib.pyplot as plt
 
-def uta():
+def uta(df, max_or_min):
 
     # df = pd.read_csv(f"./datasets/SWD_DB.csv")
     
-    df = pd.read_csv(f"./datasets/SWD_DB.csv") 
+    # df = pd.read_csv(f"./datasets/SWD_DB.csv") 
     # df = df.fillna(1)
     # df["Procent zdawalności"]=df["Procent zdawalności"].str.replace(',','.')
     # df["Próg rekrutacji"]=df["Próg rekrutacji"].str.replace(',','.')
@@ -26,8 +26,8 @@ def uta():
     points = np.array(points)
     
     min,max = get_min_max(points)
-    max_or_min = [1,1,1,0]            # jeśli 1 to maksymalizujemy kryterium, jeśli 0 minimalizujemy
-
+    # max_or_min = [1,1,1,0]            # jeśli 1 to maksymalizujemy kryterium, jeśli 0 minimalizujemy
+    max_or_min = np.where(max_or_min=='min', 0, 1)
     # Wartości funkcji użyteczności dobrane ręcznie, kod umożliwia
     # dobranie funkcji użyteczności proporcjonalnie, dla takiego przypadku
     # współczynniki a i b wychodzą takie same dla wszystkich przedziałów
@@ -53,6 +53,7 @@ def uta():
     print(np.array(score))
 
     df['UTA_score'] = score
+    return df
     # print(df.head(10))
     # plt.title('Wartości funkcji użyteczności dla PZ')
     # plot_f_utility(u1,data_u1)
@@ -65,5 +66,3 @@ def uta():
     
     # plt.title('Wartości funkcji użyteczności dla PR')
     # plot_f_utility(u4,data_u4)
-
-uta()

@@ -1,9 +1,12 @@
 import PySimpleGUI as sg
 import pandas as pd
-from fuzzy_topsis import fuzzy_topsis
-from RSM import RSM
+import numpy as np
+from fuzzy_topsis.fuzzy_topsis import fuzzy_topsis
+from RSM.RSM import RSM
 # from SPCP import SPCP
-# from UTA import UTA
+from UTA.main import uta
+from input_validation import validate
+from ranking_comparision.compare import Spearman_s_Footrule
 
 _VARS = {
     'window': False,
@@ -16,7 +19,7 @@ algos = {
     'FUZZY TOPSIS': fuzzy_topsis,
     'RSM': RSM,
     'SAFETY PRINCIPAL': '???',
-    'UTA': '???'
+    'UTA': uta
 }
 
 list_k = [
@@ -43,22 +46,27 @@ types = {
     'Wojskowe':'wojs'
 }
 
-weight_layout = [
-    [sg.Text('Podaj wagi', justification='center')],
-    [sg.Table(values=[sg.InputText(key=f'-IN{str(i)}-') for i in range(len(list_k))], headings=list_k)]
+weights_layout = [
+    [sg.Text('Podaj wagi (0 - 1)', justification='center')],
+    [sg.InputText(key=f'-WEIGHT{str(i)}-', size=(5, 1), default_text='0.00') for i in range(len(list_k[3: -2]))],
+    [sg.Text('')]
 ]
 
 criteria_layout = [
-    [sg.Text('Podaj kryteria', justification='center')],
-    [sg.Table(values=[sg.InputText(key=f'-IN{str(i)}-') for i in range(len(list_k))], headings=list_k)]
+    [sg.Text('Podaj kryteria (min/max)', justification='center')],
+    [sg.Combo(values=['min', 'max'], default_value='min', key=f'-CRIT{str(i)}-', size=(5, 1)) for i in range(len(list_k[3: -2]))],
+    [sg.Text('')]
 ]
 
-#TODO dodac nazwy funkcji
+weights = []
+criteria = []
+
+#TODO dodac paramsy funkcji
 additional_params = {
-    'FUZZY TOPSIS': [weight_layout, criteria_layout],
-    'RSM': criteria_layout,
-    'SAFETY PRINCIPAL': '???',
-    'UTA': '???'
+    'FUZZY TOPSIS': [weights, criteria],
+    'RSM': [], #checked
+    'SAFETY PRINCIPAL': ['???'],
+    'UTA': ['???']
 }
 
 choose_type_layout = [
@@ -85,6 +93,13 @@ class_layout = [
     [sg.Table([], ['Punkt','Klasa'], num_rows=2)]
 ]
 
+compare_layout = [
+    [sg.Text('Wybierz algorytmy do porównania')],
+    [sg.Combo(key='-ALGO1-', values=list(algos.keys())[1:], default_value=list(algos.keys())[1], size=(10, 1)), sg.Combo(key='-ALGO2-', values=list(algos.keys())[1:], default_value=list(algos.keys())[1], size=(10, 1))],
+    [sg.Text('')],
+    [sg.Button('Porównaj rankingi',key='-COMPARE_RANKING-')]
+]
+
 disp_ranking_layout = [
     [sg.Text('Ranking',justification='center')],
     [sg.Table([], ['Nazwa kierunku','Wynik'], num_rows=2)]
@@ -92,10 +107,12 @@ disp_ranking_layout = [
 
 layout = [
     [choose_type_layout],
+    [criteria_layout],
+    [weights_layout],
     [choose_algo_layout],
     [create_rank_layout],
-    
     [sg.Col(class_layout,vertical_alignment='top'),sg.Col(alternatives_layout,vertical_alignment='top')],
+    [compare_layout],
     [disp_ranking_layout]
 ]
 
@@ -137,12 +154,38 @@ while True:
         #     list_of_csv = list(map(tuple, data))
         # print(len(list_of_csv))
         
-        # Load database
-        db = pd.read_csv(f"./datasets/{types[values['-TYPE-']]}.csv", sep=',')
+        weights = np.array([values[f'-WEIGHT{i}-'] for i in range(len(list_k[3: -2]))])
+        criteria = np.array([values[f'-CRIT{i}-'] for i in range(len(list_k[3: -2]))])
         
-        # Call algorithm
-        # rank = values['-ALGO-'](db, jakies_dodatkowe_gowno)
-
-        _VARS['window']['-TABLE_KRYT-'].update(values=list(map(tuple, db.values)))
+        regex = "^[+-]?([0](\.(\d{0,2}))?)?$"
+        
+        if validate(weights, regex):
+            
+            # Load database
+            db = pd.read_csv(f"./datasets/{types[values['-TYPE-']]}.csv", sep=',')
+            
+            # Call algorithm if not called before
+            if f"{values['-ALGO-']}_score" not in db.columns:
+                db = algos[values['-ALGO-']](db, criteria)
+                # pass
+                
+            
+            _VARS['window']['-TABLE_KRYT-'].update(values=list(map(tuple, db.sort_values(by=[f"{values['-ALGO-']}_score"], ascending=False).values)))
+            
+        else:
+            sg.popup('Wprowadzone dane są niepoprawne\nSpróbuj ponownie')
+            
+    # Porównanie rankingów
+    if event == '-COMPARE_RANKING-':
+        if f"{values['-ALGO1-']}_score" not in db.columns:
+            # db = algos[values['-ALGO1-']](db, jakies_dodatkowe_gowno)
+            pass
+        if f"{values['-ALGO2-']}_score" not in db.columns:
+            # db = algos[values['-ALGO2-']](db, jakies_dodatkowe_gowno)
+            pass
+        # rank_1 = [idx for idx in db.sorted_values(by=[f"{values['-ALGO1-']}_score"], ascending=False).index]
+        # rank_2 = [idx for idx in db.sorted_values(by=[f"{values['-ALGO2-']}_score"], ascending=False).index]
+        # compare_result = Spearman_s_Footrule(rank_1, rank_2)
+        pass
         
 _VARS['window'].close()
