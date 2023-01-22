@@ -10,8 +10,7 @@ def normalize(fuz_num : FuzzyNumb, j, max_cols : List[float], min_cols : List[fl
 
 def cc(d_minus : np.array,d_star : np.array):
     ## step 7 and 8
-    cc_i=[(i,d_minus[i]/(d_minus[i]+d_star[i])) for i in range(len(d_minus))]
-    cc_i.sort(key=lambda x: x[1],reverse=True)
+    cc_i=[d_minus[i]/(d_minus[i]+d_star[i]) for i in range(len(d_minus))]
     return cc_i
 
 def max_fuzz(V : List[FuzzyNumb]):
