@@ -77,17 +77,17 @@ create_rank_layout = [
 
 alternatives_layout = [
     [sg.Text('Alternatywy z kryteriami',justification='center')],
-    [sg.Table(values=td, headings=list_k,key='-TABLE_KRYT-', max_col_width = 5, auto_size_columns=True, vertical_scroll_only=False, justification='center', expand_x=True, expand_y=True)]
+    [sg.Table([], headings=list_k,key='-TABLE_KRYT-', max_col_width = 5, auto_size_columns=True, vertical_scroll_only=False, justification='center', expand_x=True, expand_y=True)]
 ]
 
 class_layout = [
     [sg.Text('Klasy',justification='center')],
-    [sg.Table([], ['Col 1','Col 2','Col 3'], num_rows=2)]
+    [sg.Table([], ['Punkt','Klasa'], num_rows=2)]
 ]
 
 disp_ranking_layout = [
     [sg.Text('Ranking',justification='center')],
-    [sg.Table([], ['Col 1','Col 2','Col 3'], num_rows=2)]
+    [sg.Table([], ['Nazwa kierunku','Wynik'], num_rows=2)]
 ]
 
 layout = [
