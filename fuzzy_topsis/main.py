@@ -72,7 +72,7 @@ def fuzzy_topsis_do_gui(weights : List[int],data_frame : pd.DataFrame,max_min : 
         data_frame : df.DataFrame - data from database
         max_min : List[str] - list of strings for each collumn: "max" for profit , "min" for cost 
     return:
-        List[Tuple[int,float]] - ranking of decision first is an index of decision second is a scoring function.
+        List[float] - scoring function for each alternative.
     """
     weights = [translate_to_fuzzy_preferences(i) for i in weights]
     D = translate_value(data_frame)
