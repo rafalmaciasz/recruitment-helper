@@ -43,8 +43,25 @@ def one_to_five_translation(grade : int):
 
 
 def translate_value(data_frame) -> List[List[FuzzyNumb]]:
-    df = df[["Procent zdawalności","Ocena absolwentów","Własna ocena sylabusa","Ilość semestrów","Próg rekrutacji"]]
-    
+    df : pd.DataFrame = data_frame[["Procent zdawalności","Ocena absolwentów","Własna ocena sylabusa","Ilość semestrów","Próg rekrutacji"]]
+    df = df.to_numpy()
+    D : List[List[FuzzyNumb]] = []
+    for j in range(df.shape[0]):
+        D.append([])
+        for n,i in enumerate(["Procent zdawalności","Ocena absolwentów","Własna ocena sylabusa","Ilość semestrów","Próg rekrutacji"]):
+            if i == "Procent zdawalności":
+                x = -np.log(1-(df[j,n]/100))
+                D[j].append(FuzzyNumb(100*max(1-np.exp(-(x-1)),0),df[j,n],100*(1-np.exp(-(x+1)))))
+            elif i == "Ocena absolwentów":
+                D[j].append(one_to_five_translation(df[j,n]))
+            elif i == "Własna ocena sylabusa":
+                D[j].append(one_to_five_translation(df[j,n]))
+            elif i == "Ilość semestrów":
+                D[j].append(FuzzyNumb(df[j,n],df[j,n],df[j,n]+2))
+            elif i == "Próg rekrutacji":
+                D[j].append(FuzzyNumb(max(df[j,n]-10,0),df[j,n],min(df[j,n]+10,100)))
+    return D
+    pass
 
 
 
@@ -55,19 +72,20 @@ def fuzzy_topsis_do_gui(weights : List[int],data_frame : pd.DataFrame,max_min : 
         data_frame : df.DataFrame - data from database
         max_min : List[str] - list of strings for each collumn: "max" for profit , "min" for cost 
     return:
-        chuj wie
+        List[Tuple[int,float]] - ranking of decision first is an index of decision second is a scoring function.
     """
-    if len(weights) != len(max_min) or len(weights) != data_frame.shape[1]:
-        raise ValueError(f"Nie zgadzają się wymiary długość wag = {len(weights)}, długość data_frame = {data_frame.shape[1]}, długość max_min = {len(max_min)}")
     weights = [translate_to_fuzzy_preferences(i) for i in weights]
     D = translate_value(data_frame)
+    if len(weights) != len(max_min):
+        raise ValueError(f"Nie zgadzają się wymiary długość wag = {len(weights)}, długość data_frame = {data_frame.shape[1]}, długość max_min = {len(max_min)}")
     return fuzzy_topsis(D,weights,max_min)
 
 
 
 if __name__ == '__main__':
-    df = pd.read_csv("../datasets/lek.csv")
-
+    df = pd.read_csv("./datasets/lek.csv")
+    print(fuzzy_topsis_do_gui([1,1,1,1,1],df,["max","min","max","max","max"]))
+    pass
 
 
 
