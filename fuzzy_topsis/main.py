@@ -1,6 +1,6 @@
 import numpy as np
-from FuzzyNum import *
-from fuzzy_topsis import fuzzy_topsis
+from fuzzy_topsis.FuzzyNum import *
+from fuzzy_topsis.fuzzy_topsis import fuzzy_topsis
 from typing import List, Tuple
 import pandas as pd
 
@@ -61,7 +61,6 @@ def translate_value(data_frame) -> List[List[FuzzyNumb]]:
             elif i == "Próg rekrutacji":
                 D[j].append(FuzzyNumb(max(df[j,n]-10,1),df[j,n],min(df[j,n]+10,100)))
     return D
-    pass
 
 
 
@@ -75,11 +74,14 @@ def fuzzy_topsis_do_gui(data_frame : pd.DataFrame, additional_params: Tuple):
         List[float] - scoring function for each alternative.
     """
     # weights : List[int], max_min : List[str]
-    (weights, *max_min) = additional_params
+    (weights, *max_min) = additional_params    
+    max_min = max_min[0]
     if weights is None or max_min is []:
         raise ValueError("Błędne dane")
-    weights = [translate_to_fuzzy_preferences(i) for i in weights]
+    # weights are in range (0 - 1) so we have to convert those values
+    weights = [translate_to_fuzzy_preferences(int(i * 10)) if i > 0.1 else translate_to_fuzzy_preferences(int(i * 10) + 1) for i in weights]
     D = translate_value(data_frame)
+    print(D)
     if len(weights) != len(max_min):
         raise ValueError(f"Nie zgadzają się wymiary długość wag = {len(weights)}, długość data_frame = {data_frame.shape[1]}, długość max_min = {len(max_min)}")
     return fuzzy_topsis(D,weights,max_min)
