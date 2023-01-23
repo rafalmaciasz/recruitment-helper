@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 import pandas as pd
 import numpy as np
-from fuzzy_topsis.fuzzy_topsis import fuzzy_topsis
+from fuzzy_topsis.main import fuzzy_topsis_do_gui
 from RSM.RSM import RSM
 # from SPCP import SPCP
 from UTA.main import uta
@@ -16,7 +16,7 @@ _VARS = {
 
 #TODO dodac nazwy funkcji
 algos = {
-    'FUZZY TOPSIS': fuzzy_topsis,
+    'FUZZY TOPSIS': fuzzy_topsis_do_gui,
     'RSM': RSM,
     'SAFETY PRINCIPAL': '???',
     'UTA': uta
@@ -33,7 +33,12 @@ list_k = [
     'Próg rekrutacji', 
     'Rodzaj kierunku'
 ]
-
+result_headings = [
+    'Nazwa kierunku',
+    'Nazwa uczelni',
+    'Miasto',
+    'Score'
+]
 types = {
     'Wszystkie': 'SWD_DB',
     'Techniczne': 'tech',
@@ -58,17 +63,6 @@ criteria_layout = [
     [sg.Text('')]
 ]
 
-weights = []
-criteria = []
-
-#TODO dodac paramsy funkcji
-additional_params = {
-    'FUZZY TOPSIS': [weights, criteria],
-    'RSM': [], #checked
-    'SAFETY PRINCIPAL': ['???'],
-    'UTA': ['???']
-}
-
 choose_type_layout = [
     [sg.Text('Wybierz rodzaj kierunku'), sg.Combo(key='-TYPE-', values=list(types.keys()), default_value=list(types.keys())[0], size=(50, 10))],
     [sg.Text('')]
@@ -85,12 +79,12 @@ create_rank_layout = [
 
 alternatives_layout = [
     [sg.Text('Alternatywy z kryteriami',justification='center')],
-    [sg.Table([], headings=list_k,key='-TABLE_KRYT-', max_col_width = 5, auto_size_columns=True, vertical_scroll_only=False, justification='center', expand_x=True, expand_y=True)]
+    [sg.Table([], headings=list_k,key='-TABLE_KRYT-', num_rows=10, max_col_width = 5, auto_size_columns=True, vertical_scroll_only=False, justification='center', expand_x=True, expand_y=True)]
 ]
 
 class_layout = [
     [sg.Text('Klasy',justification='center')],
-    [sg.Table([], ['Punkt','Klasa'], num_rows=2)]
+    [sg.Table([], ['Punkt','Klasa'], key='-TABLE_CLASS-', num_rows=10)]
 ]
 
 compare_layout = [
@@ -102,7 +96,7 @@ compare_layout = [
 
 disp_ranking_layout = [
     [sg.Text('Ranking',justification='center')],
-    [sg.Table([], ['Nazwa kierunku','Wynik'], num_rows=2)]
+    [sg.Table([], result_headings, key='-TABLE_RANK-', num_rows=10)]
 ]
 
 layout = [
@@ -120,7 +114,7 @@ _VARS['window'] = sg.Window('GUI_UwU',
                             layout,
                             finalize=True,
                             resizable=True,
-                            size=(500,500),
+                            size=(500,800),
                             element_justification='center')
 
 while True:
@@ -160,17 +154,24 @@ while True:
         regex = "^[+-]?([0](\.(\d{0,2}))?)?$"
         
         if validate(weights, regex):
+
+            #TODO dodac paramsy funkcji
+            additional_params = {
+                'FUZZY TOPSIS': (weights, criteria), #checked
+                'RSM': [], #checked
+                'SAFETY PRINCIPAL': ['???'],
+                'UTA': criteria
+            }
             
             # Load database
             db = pd.read_csv(f"./datasets/{types[values['-TYPE-']]}.csv", sep=',')
+            _VARS['window']['-TABLE_KRYT-'].update(values=list(map(tuple, db.values)))
             
             # Call algorithm if not called before
             if f"{values['-ALGO-']}_score" not in db.columns:
-                db = algos[values['-ALGO-']](db, criteria)
-                # pass
-                
+                db = algos[values['-ALGO-']](db, additional_params[values['-ALGO-']])
             
-            _VARS['window']['-TABLE_KRYT-'].update(values=list(map(tuple, db.sort_values(by=[f"{values['-ALGO-']}_score"], ascending=False).values)))
+            _VARS['window']['-TABLE_RANK-'].update(values=list(map(tuple, db.sort_values(by=[f"{values['-ALGO-']}_score"], ascending=False)[result_headings[:-1] + [f"{values['-ALGO-']}_score"]].values)))
             
         else:
             sg.popup('Wprowadzone dane są niepoprawne\nSpróbuj ponownie')
