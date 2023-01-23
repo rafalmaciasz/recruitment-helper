@@ -100,12 +100,12 @@ def plot_f_utility(u,compartments,max_or_min): # u - lista współczynników a i
             plt.plot(x, y, c =cmap(i))
 
         if max_or_min == 0: # minimalizacja
-            x = np.linspace(compartments[i][0],compartments[i+1][0],100)
-            y = a*x+b
-            if i == len(u)-1:
-                plt.scatter(compartments[len(u)][0],a*compartments[len(u)][0]+b, c = 'blue')
-            plt.scatter(compartments[i][0],a*compartments[i][0]+b, c = 'blue')
-            plt.plot(x, y, c =cmap(i))
+        x = np.linspace(compartments[i][0],compartments[i+1][0],100)
+        y = a*x+b
+        if i == len(u)-1:
+            plt.scatter(compartments[len(u)][0],a*compartments[len(u)][0]+b, c = 'blue')
+        plt.scatter(compartments[i][0],a*compartments[i][0]+b, c = 'blue')
+        plt.plot(x, y, c =cmap(i))
         
     plt.grid()
     plt.show()

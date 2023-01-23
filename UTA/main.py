@@ -36,10 +36,10 @@ def uta(df, max_or_min):
         score.append(rank(u,compartments,point))
 
     df['UTA_score'] = score
-
+    
     # for i in range(len(func_utility)):
     #     plt.title(f'Wartości funkcji użyteczności dla kryterium: {column_names[i]}')
     #     plot_f_utility(u[i],compartments[i],max_or_min[i])
-
+    
     return df
     
