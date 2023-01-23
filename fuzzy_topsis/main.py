@@ -1,7 +1,7 @@
 import numpy as np
 from FuzzyNum import *
 from fuzzy_topsis import fuzzy_topsis
-from typing import List
+from typing import List, Tuple
 import pandas as pd
 
 def translate_to_fuzzy_preferences(grade : int):
@@ -65,7 +65,7 @@ def translate_value(data_frame) -> List[List[FuzzyNumb]]:
 
 
 
-def fuzzy_topsis_do_gui(weights : List[int],data_frame : pd.DataFrame,max_min : List[str]):
+def fuzzy_topsis_do_gui(data_frame : pd.DataFrame, additional_params: Tuple):
     """
     args:
         weights : List[int] - list that contains nombers 1-9 where 9 is Absolutely important and 1 is Equally important
@@ -74,6 +74,10 @@ def fuzzy_topsis_do_gui(weights : List[int],data_frame : pd.DataFrame,max_min : 
     return:
         List[float] - scoring function for each alternative.
     """
+    # weights : List[int], max_min : List[str]
+    (weights, *max_min) = additional_params
+    if weights is None or max_min is []:
+        raise ValueError("Błędne dane")
     weights = [translate_to_fuzzy_preferences(i) for i in weights]
     D = translate_value(data_frame)
     if len(weights) != len(max_min):
