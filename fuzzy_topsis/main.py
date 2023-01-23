@@ -51,7 +51,7 @@ def translate_value(data_frame) -> List[List[FuzzyNumb]]:
         for n,i in enumerate(["Procent zdawalności","Ocena absolwentów","Własna ocena sylabusa","Ilość semestrów","Próg rekrutacji"]):
             if i == "Procent zdawalności":
                 x = -np.log(1-(df[j,n]/100))
-                D[j].append(FuzzyNumb(100*max(1-np.exp(-(x-1)),0),df[j,n],100*(1-np.exp(-(x+1)))))
+                D[j].append(FuzzyNumb(100*max(1-np.exp(-(x-1)),1),df[j,n],100*(1-np.exp(-(x+1)))))
             elif i == "Ocena absolwentów":
                 D[j].append(one_to_five_translation(df[j,n]))
             elif i == "Własna ocena sylabusa":
@@ -59,7 +59,7 @@ def translate_value(data_frame) -> List[List[FuzzyNumb]]:
             elif i == "Ilość semestrów":
                 D[j].append(FuzzyNumb(df[j,n],df[j,n],df[j,n]+2))
             elif i == "Próg rekrutacji":
-                D[j].append(FuzzyNumb(max(df[j,n]-10,0),df[j,n],min(df[j,n]+10,100)))
+                D[j].append(FuzzyNumb(max(df[j,n]-10,1),df[j,n],min(df[j,n]+10,100)))
     return D
     pass
 
@@ -87,8 +87,9 @@ def fuzzy_topsis_do_gui(data_frame : pd.DataFrame, additional_params: Tuple):
 
 
 if __name__ == '__main__':
-    df = pd.read_csv("./datasets/lek.csv")
-    print(fuzzy_topsis_do_gui([1,1,1,1,1],df,["max","min","max","max","max"]))
+    df = pd.read_csv("./datasets/SWD_DB.csv")
+    t = ([1,1,1,1,1],"max","min","max","max","max")
+    print(fuzzy_topsis_do_gui(df,t))
     pass
 
 
