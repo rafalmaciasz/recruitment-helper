@@ -1,5 +1,7 @@
 from typing import List,Callable
 import numpy as np
+import pandas as pd
+
 
 def cum_count_path(woron_points,metrics = None):
     if metrics == None:
@@ -20,11 +22,13 @@ def costam(w1:np.ndarray,w2: np.ndarray,w3: np.ndarray):
         return np.linalg.norm(new), np.linalg.norm(w3_p - new)
     return -1,-1
 
+
 def zwrot_wagi(Ide,Aide):
     waga=0
     for i in range(len(Ide)):
         waga=waga+volume(Ide[i],Aide[i])
     return waga
+
 
 def volume(pkt1,pkt2):
     l=[]
@@ -38,6 +42,7 @@ def volume(pkt1,pkt2):
         V=V*l[i]
     return V
 
+
 def czy_w_obszarze(u,pkt1,pkt2):
     isTRUE=[]
     for i in range(len(u)):
@@ -46,6 +51,7 @@ def czy_w_obszarze(u,pkt1,pkt2):
         if (isTRUE[j]==False):
             return -1
     return volume(pkt1,pkt2)
+
 
 def woronoj(pkt_1 : np.ndarray,pkt_2 : np.ndarray):
     N = len(pkt_1)
@@ -69,12 +75,14 @@ def woronoj(pkt_1 : np.ndarray,pkt_2 : np.ndarray):
         dimentions[idx] = 0
     return np.array(woronoj_points) + pkt_1_temp
 
+
 def norm(A : List[List[float]], C :  List[List[float]]):
     A1=np.array(A)
     C1=np.array(C)
     normalizedA=(A1-np.min(A1))/(np.max(A1)-np.min(A1))
     normalizedC=(C1-np.min(C1))/(np.max(C1)-np.min(C1))
     return normalizedA,normalizedC
+
 
 def SPCS(idealny : List[np.ndarray], antyidealny : List[np.ndarray], punkty : List[np.ndarray]):
     scoring = []
@@ -108,6 +116,18 @@ def SPCS(idealny : List[np.ndarray], antyidealny : List[np.ndarray], punkty : Li
                 scoring[pkt] += w*d_path
         scoring[pkt] = scoring[pkt]/waga
     return scoring
-    pass
 
 
+def gui_spcs(df, additional_params):
+
+    df_data = df[df.columns[3:8]]
+    num = df_data.to_numpy()
+    ide = []
+    aide = []
+    for i in df_data.columns:
+        ddf = df_data.sort_values([i])
+        aide.append((ddf.iloc[-1]).to_numpy())
+        ide.append((ddf.iloc[0]).to_numpy())
+        
+    df['SAFETY_PRINCIPAL_score'] = SPCS(ide,aide,num)
+    return df

@@ -3,22 +3,15 @@ import pandas as pd
 import numpy as np
 from fuzzy_topsis.main import fuzzy_topsis_do_gui
 from RSM.RSM import RSM
-# from SPCP import SPCP
+from spcs.spcs import gui_spcs
 from UTA.main import uta
 from input_validation import validate
 from ranking_comparision.compare import Spearman_s_Footrule
 
-_VARS = {
-    'window': False,
-    'fig_agg': False,
-    'pltFig': False
-}
-
-#TODO dodac nazwy funkcji
 algos = {
     'FUZZY_TOPSIS': fuzzy_topsis_do_gui,
     'RSM': RSM,
-    'SAFETY_PRINCIPAL': '???',
+    'SAFETY_PRINCIPAL': gui_spcs,
     'UTA': uta
 }
 
@@ -33,12 +26,14 @@ list_k = [
     'Próg rekrutacji', 
     'Rodzaj kierunku'
 ]
+
 result_headings = [
     'Nazwa kierunku',
     'Nazwa uczelni',
     'Miasto',
     'Score'
 ]
+
 types = {
     'Wszystkie': 'SWD_DB',
     'Techniczne': 'tech',
@@ -53,14 +48,14 @@ types = {
 
 weights_layout = [
     [sg.Text('Podaj wagi (0 - 1)', justification='center')],
-    [sg.InputText(key=f'-WEIGHT{str(i)}-', size=(22, 1), default_text='0.00') for i in range(len(list_k[3: -1]))],
+    [sg.InputText(key=f'-WEIGHT{str(i)}-', size=(25, 1), default_text='  0') for i in range(len(list_k[3: -1]))],
     [sg.Text('')]
 ]
 
 criteria_layout = [
     [sg.Text('Podaj kryteria (min/max)', justification='center')],
-    [sg.Text(list_k[i], size=(20, 1)) for i in range(len(list_k[3: -1]))],
-    [sg.Combo(values=['min', 'max'], default_value='min', key=f'-CRIT{str(i)}-', size=(20, 1)) for i in range(len(list_k[3: -1]))],
+    [sg.Text(i, size=(25, 1)) for i in list_k[3: -1]],
+    [sg.Combo(values=['min', 'max'], default_value='min', key=f'-CRIT{str(i)}-', size=(23, 1)) for i in range(len(list_k[3: -1]))],
     [sg.Text('')]
 ]
 
@@ -82,11 +77,6 @@ alternatives_layout = [
     [sg.Text('Alternatywy z kryteriami', justification='center')],
     [sg.Table([], headings=list_k,key='-TABLE_KRYT-', num_rows=10, max_col_width = 5, auto_size_columns=True, vertical_scroll_only=False, justification='center', expand_x=True, expand_y=True)]
 ]
-
-# class_layout = [
-#     [sg.Text('Klasy',justification='center')],
-#     [sg.Table([], ['Punkt','Klasa'], key='-TABLE_CLASS-', num_rows=10)]
-# ]
 
 disp_ranking_layout = [
     [sg.Text('Ranking',justification='center')],
@@ -116,27 +106,28 @@ layout = [
     [disp_comparision_layout]
 ]
 
-_VARS['window'] = sg.Window('GUI_UwU',
+window = sg.Window('GUI_UwU',
                             layout,
                             finalize=True,
                             resizable=True,
                             size=(1000,800),
                             element_justification='center')
 
-def read_add_params() -> dict:
+
+def read_additional_params() -> dict:
     
-    weights = np.array([values[f'-WEIGHT{i}-'] for i in range(len(list_k[3: -1]))])
+    weights = np.array([str.lstrip(values[f'-WEIGHT{i}-']) for i in range(len(list_k[3: -1]))])
     criteria = np.array([values[f'-CRIT{i}-'] for i in range(len(list_k[3: -1]))])
-    
-    regex = "^[+-]?([0](\.(\d{0,2}))?)?$"
+
+    regex = "^[+-]?([1-9])?$"
     
     if validate(weights, regex):
         
-        weights = [float(i) for i in weights]
+        weights = [int(i) for i in weights]
         additional_params = {
                     'FUZZY_TOPSIS': (weights, criteria), #checked
                     'RSM': criteria, #checked
-                    'SAFETY_PRINCIPAL': ['???'],
+                    'SAFETY_PRINCIPAL': None, #checked
                     'UTA': criteria #checked
                 }
         
@@ -144,12 +135,12 @@ def read_add_params() -> dict:
     
     else:
         sg.popup('Wprowadzone dane są niepoprawne\nSpróbuj ponownie')
-        pass
+        return None, None, None
 
 
 while True:
     
-    event, values = _VARS['window'].read(timeout=200)
+    event, values = window.read(timeout=200)
     
     if event == sg.WIN_CLOSED:
         break
@@ -157,42 +148,37 @@ while True:
     # Obliczenie rankingu pojedyńczą metodą
     if event == '-BUTTON_RANKING-':
         
-        # weights = np.array([values[f'-WEIGHT{i}-'] for i in range(len(list_k[3: -2]))])
-        # criteria = np.array([values[f'-CRIT{i}-'] for i in range(len(list_k[3: -2]))])
-        additional_params, weights, criteria = read_add_params()
-       
-        # Load database
-        db = pd.read_csv(f"./datasets/{types[values['-TYPE-']]}.csv", sep=',')
-        _VARS['window']['-TABLE_KRYT-'].update(values=list(map(tuple, db.values)))
+        additional_params, weights, criteria = read_additional_params()
         
-        # Call algorithm if not called before
-        if f"{values['-ALGO-']}_score" not in db.columns:
-            db = algos[values['-ALGO-']](db, additional_params[values['-ALGO-']])
+        if additional_params is not None:
+            # Load database
+            db = pd.read_csv(f"./datasets/{types[values['-TYPE-']]}.csv", sep=',')
+            window['-TABLE_KRYT-'].update(values=list(map(tuple, db.values)))
+            
+            # Call algorithm if not called before
+            if f"{values['-ALGO-']}_score" not in db.columns:
+                db = algos[values['-ALGO-']](db, additional_params[values['-ALGO-']])
 
-        _VARS['window']['-TABLE_RANK-'].update(values=list(map(tuple, db.sort_values(by=[f"{values['-ALGO-']}_score"], ascending=False)[result_headings[:-1] + [f"{values['-ALGO-']}_score"]].values)))
-        
+            window['-TABLE_RANK-'].update(values=list(map(tuple, db.sort_values(by=[f"{values['-ALGO-']}_score"], ascending=False)[result_headings[:-1] + [f"{values['-ALGO-']}_score"]].values)))
             
     # Porównanie rankingów
     if event == '-COMPARE_RANKING-':
         
-        # weights = np.array([values[f'-WEIGHT{i}-'] for i in range(len(list_k[3: -2]))])
-        # criteria = np.array([values[f'-CRIT{i}-'] for i in range(len(list_k[3: -2]))])
+        additional_params, weights, criteria = read_additional_params()
+          
+        if additional_params is not None:  
+            db = pd.read_csv(f"./datasets/{types[values['-TYPE-']]}.csv", sep=',')
+            window['-TABLE_KRYT-'].update(values=list(map(tuple, db.values)))
         
-        additional_params, weights, criteria = read_add_params()
-            
-        db = pd.read_csv(f"./datasets/{types[values['-TYPE-']]}.csv", sep=',')
-        _VARS['window']['-TABLE_KRYT-'].update(values=list(map(tuple, db.values)))
-    
-        if f"{values['-ALGO1-']}_score" not in db.columns:
-            db = algos[values['-ALGO1-']](db, additional_params[values['-ALGO1-']])
+            if f"{values['-ALGO1-']}_score" not in db.columns:
+                db = algos[values['-ALGO1-']](db, additional_params[values['-ALGO1-']])
 
-        if f"{values['-ALGO2-']}_score" not in db.columns:
-            db = algos[values['-ALGO2-']](db, additional_params[values['-ALGO2-']])
-            
-        rank_1 = [idx for idx in db.sort_values(by=[f"{values['-ALGO1-']}_score"], ascending=False).index]
-        rank_2 = [idx for idx in db.sort_values(by=[f"{values['-ALGO2-']}_score"], ascending=False).index]
-        compare_result = Spearman_s_Footrule(rank_1, rank_2)
-        _VARS['window']['-OUT-'].update(value=str(compare_result))
-        print(compare_result)
+            if f"{values['-ALGO2-']}_score" not in db.columns:
+                db = algos[values['-ALGO2-']](db, additional_params[values['-ALGO2-']])
+                
+            rank_1 = [idx for idx in db.sort_values(by=[f"{values['-ALGO1-']}_score"], ascending=False).index]
+            rank_2 = [idx for idx in db.sort_values(by=[f"{values['-ALGO2-']}_score"], ascending=False).index]
+            compare_result = Spearman_s_Footrule(rank_1, rank_2)
+            window['-OUT-'].update(value=str(compare_result))
         
-_VARS['window'].close()
+window.close()
