@@ -1,7 +1,7 @@
 import numpy as np
-from FuzzyNum import *
-from fuzzy_topsis import fuzzy_topsis
-from typing import List
+from fuzzy_topsis.FuzzyNum import *
+from fuzzy_topsis.fuzzy_topsis import fuzzy_topsis
+from typing import List, Tuple
 import pandas as pd
 
 def translate_to_fuzzy_preferences(grade : int):
@@ -51,7 +51,7 @@ def translate_value(data_frame) -> List[List[FuzzyNumb]]:
         for n,i in enumerate(["Procent zdawalności","Ocena absolwentów","Własna ocena sylabusa","Ilość semestrów","Próg rekrutacji"]):
             if i == "Procent zdawalności":
                 x = -np.log(1-(df[j,n]/100))
-                D[j].append(FuzzyNumb(100*max(1-np.exp(-(x-1)),0),df[j,n],100*(1-np.exp(-(x+1)))))
+                D[j].append(FuzzyNumb(100*max(1-np.exp(-(x-1)),1),df[j,n],100*(1-np.exp(-(x+1)))))
             elif i == "Ocena absolwentów":
                 D[j].append(one_to_five_translation(df[j,n]))
             elif i == "Własna ocena sylabusa":
@@ -59,13 +59,12 @@ def translate_value(data_frame) -> List[List[FuzzyNumb]]:
             elif i == "Ilość semestrów":
                 D[j].append(FuzzyNumb(df[j,n],df[j,n],df[j,n]+2))
             elif i == "Próg rekrutacji":
-                D[j].append(FuzzyNumb(max(df[j,n]-10,0),df[j,n],min(df[j,n]+10,100)))
+                D[j].append(FuzzyNumb(max(df[j,n]-10,1),df[j,n],min(df[j,n]+10,100)))
     return D
-    pass
 
 
 
-def fuzzy_topsis_do_gui(weights : List[int],data_frame : pd.DataFrame,max_min : List[str]):
+def fuzzy_topsis_do_gui(data_frame : pd.DataFrame, additional_params: Tuple):
     """
     args:
         weights : List[int] - list that contains nombers 1-9 where 9 is Absolutely important and 1 is Equally important
@@ -74,8 +73,15 @@ def fuzzy_topsis_do_gui(weights : List[int],data_frame : pd.DataFrame,max_min : 
     return:
         List[float] - scoring function for each alternative.
     """
-    weights = [translate_to_fuzzy_preferences(i) for i in weights]
+    # weights : List[int], max_min : List[str]
+    (weights, *max_min) = additional_params    
+    max_min = max_min[0]
+    if weights is None or max_min is []:
+        raise ValueError("Błędne dane")
+    # weights are in range (0 - 1) so we have to convert those values
+    weights = [translate_to_fuzzy_preferences(int(i * 10)) if i > 0.1 else translate_to_fuzzy_preferences(int(i * 10) + 1) for i in weights]
     D = translate_value(data_frame)
+    print(D)
     if len(weights) != len(max_min):
         raise ValueError(f"Nie zgadzają się wymiary długość wag = {len(weights)}, długość data_frame = {data_frame.shape[1]}, długość max_min = {len(max_min)}")
     return fuzzy_topsis(D,weights,max_min)
@@ -83,8 +89,9 @@ def fuzzy_topsis_do_gui(weights : List[int],data_frame : pd.DataFrame,max_min : 
 
 
 if __name__ == '__main__':
-    df = pd.read_csv("./datasets/lek.csv")
-    print(fuzzy_topsis_do_gui([1,1,1,1,1],df,["max","min","max","max","max"]))
+    df = pd.read_csv("./datasets/SWD_DB.csv")
+    t = ([1,1,1,1,1],"max","min","max","max","max")
+    print(fuzzy_topsis_do_gui(df,t))
     pass
 
 
