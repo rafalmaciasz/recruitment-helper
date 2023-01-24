@@ -59,7 +59,7 @@ def RSM(df, additional_params):
     """
     min_max = [np.min if i == 'min' else np.max for i in additional_params]
 
-    A = [[120,6,6,4,10],[10,1,1,12,100]]
+    A = [[120,6,6,3,1],[10,1,1,12,100],[1,1,7,3,100],[120,1,1,13,10],[120,1,0,4,10],[1,1,1,2,10],[130,7,1,1,10],[5,7,1,1,10]]
     B = df[df.columns[3: 8]].values
     
     A0, rest = zdominowane(A, min_max)
