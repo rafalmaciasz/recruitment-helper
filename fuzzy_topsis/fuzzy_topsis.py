@@ -1,4 +1,4 @@
-from FuzzyNum import FuzzyNumb
+from fuzzy_topsis.FuzzyNum import FuzzyNumb
 from typing import List
 import numpy as np
 

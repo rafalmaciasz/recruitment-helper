@@ -23,8 +23,8 @@ def uta(df, max_or_min):
     # dobranie funkcji użyteczności proporcjonalnie, dla takiego przypadku
     # współczynniki a i b wychodzą takie same dla wszystkich przedziałów
 
-    func_utility = [[0.2,0.02,0],[0.2,0.16,0.12,0.08,0],[0.2,0.16,0.12,0.08,0],[0.2,0.17,0.14,0.11,0.08,0.05,0],[0.20,0.10,0]]
-    compartments = split(min,max,np.array([2,4,4,7,2]),max_or_min,func_utility)
+    func_utility = [[0.2,0.02,0],[0.2,0.16,0.12,0.08,0],[0.2,0.16,0.12,0.08,0],[0.2,0.16,0.12,0.08,0.04,0],[0.20,0.10,0]]
+    compartments = split(min,max,np.array([2,4,4,6,2]),max_or_min,func_utility)
     
     # Wartość współczynników dla funkcji użyteczności w danych przedziałach
     u = list()

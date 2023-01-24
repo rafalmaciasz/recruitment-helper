@@ -16,9 +16,9 @@ _VARS = {
 
 #TODO dodac nazwy funkcji
 algos = {
-    'FUZZY TOPSIS': fuzzy_topsis_do_gui,
+    'FUZZY_TOPSIS': fuzzy_topsis_do_gui,
     'RSM': RSM,
-    'SAFETY PRINCIPAL': '???',
+    'SAFETY_PRINCIPAL': '???',
     'UTA': uta
 }
 
@@ -53,13 +53,14 @@ types = {
 
 weights_layout = [
     [sg.Text('Podaj wagi (0 - 1)', justification='center')],
-    [sg.InputText(key=f'-WEIGHT{str(i)}-', size=(5, 1), default_text='0.00') for i in range(len(list_k[3: -1]))],
+    [sg.InputText(key=f'-WEIGHT{str(i)}-', size=(22, 1), default_text='0.00') for i in range(len(list_k[3: -1]))],
     [sg.Text('')]
 ]
 
 criteria_layout = [
     [sg.Text('Podaj kryteria (min/max)', justification='center')],
-    [sg.Combo(values=['min', 'max'], default_value='min', key=f'-CRIT{str(i)}-', size=(5, 1)) for i in range(len(list_k[3: -1]))],
+    [sg.Text(list_k[i], size=(20, 1)) for i in range(len(list_k[3: -1]))],
+    [sg.Combo(values=['min', 'max'], default_value='min', key=f'-CRIT{str(i)}-', size=(20, 1)) for i in range(len(list_k[3: -1]))],
     [sg.Text('')]
 ]
 
@@ -78,13 +79,18 @@ create_rank_layout = [
 ]
 
 alternatives_layout = [
-    [sg.Text('Alternatywy z kryteriami',justification='center')],
+    [sg.Text('Alternatywy z kryteriami', justification='center')],
     [sg.Table([], headings=list_k,key='-TABLE_KRYT-', num_rows=10, max_col_width = 5, auto_size_columns=True, vertical_scroll_only=False, justification='center', expand_x=True, expand_y=True)]
 ]
 
-class_layout = [
-    [sg.Text('Klasy',justification='center')],
-    [sg.Table([], ['Punkt','Klasa'], key='-TABLE_CLASS-', num_rows=10)]
+# class_layout = [
+#     [sg.Text('Klasy',justification='center')],
+#     [sg.Table([], ['Punkt','Klasa'], key='-TABLE_CLASS-', num_rows=10)]
+# ]
+
+disp_ranking_layout = [
+    [sg.Text('Ranking',justification='center')],
+    [sg.Table([], result_headings, key='-TABLE_RANK-', num_rows=10, auto_size_columns=True)]
 ]
 
 compare_layout = [
@@ -94,9 +100,8 @@ compare_layout = [
     [sg.Button('Porównaj rankingi',key='-COMPARE_RANKING-')]
 ]
 
-disp_ranking_layout = [
-    [sg.Text('Ranking',justification='center')],
-    [sg.Table([], result_headings, key='-TABLE_RANK-', num_rows=10)]
+disp_comparision_layout = [
+    [sg.Text('', justification='center', key='-OUT-')]
 ]
 
 layout = [
@@ -105,16 +110,17 @@ layout = [
     [weights_layout],
     [choose_algo_layout],
     [create_rank_layout],
-    [sg.Col(class_layout,vertical_alignment='top'),sg.Col(alternatives_layout,vertical_alignment='top')],
+    [sg.Col(alternatives_layout,vertical_alignment='top')],
+    [disp_ranking_layout],
     [compare_layout],
-    [disp_ranking_layout]
+    [disp_comparision_layout]
 ]
 
 _VARS['window'] = sg.Window('GUI_UwU',
                             layout,
                             finalize=True,
                             resizable=True,
-                            size=(500,800),
+                            size=(1000,800),
                             element_justification='center')
 
 def read_add_params() -> dict:
@@ -128,9 +134,9 @@ def read_add_params() -> dict:
         
         weights = [float(i) for i in weights]
         additional_params = {
-                    'FUZZY TOPSIS': (weights, criteria), #checked
-                    'RSM': [], #checked
-                    'SAFETY PRINCIPAL': ['???'],
+                    'FUZZY_TOPSIS': (weights, criteria), #checked
+                    'RSM': criteria, #checked
+                    'SAFETY_PRINCIPAL': ['???'],
                     'UTA': criteria #checked
                 }
         
@@ -162,7 +168,7 @@ while True:
         # Call algorithm if not called before
         if f"{values['-ALGO-']}_score" not in db.columns:
             db = algos[values['-ALGO-']](db, additional_params[values['-ALGO-']])
-        
+
         _VARS['window']['-TABLE_RANK-'].update(values=list(map(tuple, db.sort_values(by=[f"{values['-ALGO-']}_score"], ascending=False)[result_headings[:-1] + [f"{values['-ALGO-']}_score"]].values)))
         
             
@@ -179,13 +185,14 @@ while True:
     
         if f"{values['-ALGO1-']}_score" not in db.columns:
             db = algos[values['-ALGO1-']](db, additional_params[values['-ALGO1-']])
-            pass
+
         if f"{values['-ALGO2-']}_score" not in db.columns:
             db = algos[values['-ALGO2-']](db, additional_params[values['-ALGO2-']])
-            pass
-        rank_1 = [idx for idx in db.sorted_values(by=[f"{values['-ALGO1-']}_score"], ascending=False).index]
-        rank_2 = [idx for idx in db.sorted_values(by=[f"{values['-ALGO2-']}_score"], ascending=False).index]
+            
+        rank_1 = [idx for idx in db.sort_values(by=[f"{values['-ALGO1-']}_score"], ascending=False).index]
+        rank_2 = [idx for idx in db.sort_values(by=[f"{values['-ALGO2-']}_score"], ascending=False).index]
         compare_result = Spearman_s_Footrule(rank_1, rank_2)
+        _VARS['window']['-OUT-'].update(value=str(compare_result))
         print(compare_result)
         
 _VARS['window'].close()

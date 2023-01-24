@@ -81,10 +81,11 @@ def fuzzy_topsis_do_gui(data_frame : pd.DataFrame, additional_params: Tuple):
     # weights are in range (0 - 1) so we have to convert those values
     weights = [translate_to_fuzzy_preferences(int(i * 10)) if i > 0.1 else translate_to_fuzzy_preferences(int(i * 10) + 1) for i in weights]
     D = translate_value(data_frame)
-    print(D)
     if len(weights) != len(max_min):
         raise ValueError(f"Nie zgadzają się wymiary długość wag = {len(weights)}, długość data_frame = {data_frame.shape[1]}, długość max_min = {len(max_min)}")
-    return fuzzy_topsis(D,weights,max_min)
+    
+    data_frame['FUZZY_TOPSIS_score'] = fuzzy_topsis(D,weights,max_min)
+    return data_frame
 
 
 
