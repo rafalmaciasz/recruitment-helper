@@ -4,15 +4,32 @@ import pandas as pd
 import numpy as np
 
 if __name__ == '__main__':
-    min_max = [np.max,np.min,np.min]
-    Ide = np.array([[64,4000,10],[32,5000,25],[16,4000,20]])
-    AIde = np.array([[8,8000,35],[16,7000,100],[32,10000,50]])
-    badane = np.array([[16,8000,35],[32,6000,70],[8,4500,21],[8,5000,30]])
-    print(SPCS(Ide,AIde,badane))
-
-def gui_spc(weights):
-
+    df_og = pd.read_csv("C:\studia\sem_5\SWD\projekt/recruitment-helper\datasets\ekon.csv")
+    lst = ["Procent zdawalności","Ocena absolwentów","Własna ocena sylabusa"]
+    df : pd.DataFrame = df_og[lst]
+    num = df.to_numpy()
+    ide = []
+    aide = []
+    for i in lst:
+        ddf = df.sort_values([i])
+        aide.append((ddf.iloc[-1]).to_numpy())
+        ide.append((ddf.iloc[0]).to_numpy())
+    rep = SPCS(ide,aide,num)
+    df_kon = df_og.assign(Wartosc=rep)
+    print(df_kon.sort_values('Wartosc',ascending=False))
     pass
 
-# if __name__ == '__main__':
-#     df = pd.read_csv('./datasets/lek.csv')
+def gui_spc(df_og: pd.DataFrame):
+    lst = ["Procent zdawalności","Ocena absolwentów","Własna ocena sylabusa"]
+    df : pd.DataFrame = df_og[lst]
+    num = df.to_numpy()
+    ide = []
+    aide = []
+    for i in lst:
+        ddf = df.sort_values([i])
+        aide.append((ddf.iloc[-1]).to_numpy())
+        ide.append((ddf.iloc[0]).to_numpy())
+    rep = SPCS(ide,aide,num)
+    df_kon = df_og.assign(Wartosc=rep)
+    return df_kon.sort_values('Wartosc',ascending=False)
+
