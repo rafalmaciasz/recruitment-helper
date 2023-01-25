@@ -121,7 +121,20 @@ def SPCS(idealny : List[np.ndarray], antyidealny : List[np.ndarray], punkty : Li
     return scoring
 
 def gui_spcs(df, additional_params):
+<<<<<<< HEAD
+    min_max = ['max','max','max']
+    A = [[120,6,6],[10,1,1],[1,1,1],[120,1,1],[120,1,0],[1,1,1],[130,5,8],[5,2,1]]
+    A0, rest = zdominowane(A, min_max)
+    A1, rest = zdominowane(rest, min_max)
+    df_data = df[df.columns[3:6]]
+    num = df_data.to_numpy()
 
+    df['SAFETY_PRINCIPAL_score'] = SPCS(np.array(A0),np.array(A1),num)
+=======
+    min_max = [np.min if i == 'min' else np.max for i in additional_params]
+    A = [[120,6,6,3,1],[10,1,1,12,100],[1,1,7,3,100],[120,1,1,13,10],[120,1,0,4,10],[1,1,1,2,10],[130,7,1,1,10],[5,7,1,1,10]]
+    A0, rest = zdominowane(A, min_max)
+    A1, rest = zdominowane(rest, min_max)
     df_data = df[df.columns[3:8]]
     num = df_data.to_numpy()
     ide = []
@@ -130,6 +143,6 @@ def gui_spcs(df, additional_params):
         ddf = df_data.sort_values([i])
         aide.append((ddf.iloc[-1]).to_numpy())
         ide.append((ddf.iloc[0]).to_numpy())
-        
-    df['SAFETY_PRINCIPAL_score'] = SPCS(ide,aide,num)
+    df['SAFETY_PRINCIPAL_score'] = SPCS(A0,A1,num)
+>>>>>>> fadb806ba986fa59c8efdb473600917504a5a33c
     return df
