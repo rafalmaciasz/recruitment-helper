@@ -130,5 +130,5 @@ def gui_spcs(df, additional_params):
         ddf = df_data.sort_values([i])
         aide.append((ddf.iloc[-1]).to_numpy())
         ide.append((ddf.iloc[0]).to_numpy())
-    df['SAFETY_PRINCIPAL_score'] = SPCS(ide,aide,num)
+    df['SAFETY_PRINCIPAL_score'] = SPCS(A0,A1,num)
     return df
