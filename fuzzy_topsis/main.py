@@ -50,8 +50,11 @@ def translate_value(data_frame) -> List[List[FuzzyNumb]]:
         D.append([])
         for n,i in enumerate(["Procent zdawalności","Ocena absolwentów","Własna ocena sylabusa","Ilość semestrów","Próg rekrutacji"]):
             if i == "Procent zdawalności":
-                x = -np.log(1-(df[j,n]/100))
-                D[j].append(FuzzyNumb(100*max(1-np.exp(-(x-1)),1),df[j,n],100*(1-np.exp(-(x+1)))))
+                if df[j,n] == 100:
+                    D[j].append(FuzzyNumb(99.99,100,100))
+                else:
+                    x = -np.log(1-(df[j,n]/100))
+                    D[j].append(FuzzyNumb(100*max(1-np.exp(-(x-1)),1),df[j,n],100*(1-np.exp(-(x+1)))))
             elif i == "Ocena absolwentów":
                 D[j].append(one_to_five_translation(df[j,n]))
             elif i == "Własna ocena sylabusa":
