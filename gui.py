@@ -47,8 +47,8 @@ types = {
 }
 
 weights_layout = [
-    [sg.Text('Podaj wagi (0 - 1)', justification='center')],
-    [sg.InputText(key=f'-WEIGHT{str(i)}-', size=(25, 1), default_text='  0') for i in range(len(list_k[3: -1]))],
+    [sg.Text('Podaj wagi (1 - 9)', justification='center')],
+    [sg.InputText(key=f'-WEIGHT{str(i)}-', size=(25, 1), default_text='  1') for i in range(len(list_k[3: -1]))],
     [sg.Text('')]
 ]
 
