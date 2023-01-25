@@ -48,24 +48,24 @@ types = {
 
 weights_layout = [
     [sg.Text('Podaj wagi (1 - 9)', justification='center')],
-    [sg.InputText(key=f'-WEIGHT{str(i)}-', size=(25, 1), default_text='  1') for i in range(len(list_k[3: -1]))],
+    [sg.InputText(key=f'-WEIGHT{str(i)}-', size=(20, 1), default_text='  1') for i in range(len(list_k[3: -1]))],
     [sg.Text('')]
 ]
 
 criteria_layout = [
     [sg.Text('Podaj kryteria (min/max)', justification='center')],
-    [sg.Text(i, size=(25, 1)) for i in list_k[3: -1]],
-    [sg.Combo(values=['min', 'max'], default_value='min', key=f'-CRIT{str(i)}-', size=(23, 1)) for i in range(len(list_k[3: -1]))],
+    [sg.Text(i, size=(20, 1)) for i in list_k[3: -1]],
+    [sg.Combo(values=['min', 'max'], default_value='min', key=f'-CRIT{str(i)}-', size=(20, 1)) for i in range(len(list_k[3: -1]))],
     [sg.Text('')]
 ]
 
 choose_type_layout = [
-    [sg.Text('Wybierz rodzaj kierunku'), sg.Combo(key='-TYPE-', values=list(types.keys()), default_value=list(types.keys())[0], size=(50, 10))],
+    [sg.Text('Wybierz rodzaj kierunku'), sg.Combo(key='-TYPE-', values=list(types.keys()), default_value=list(types.keys())[0], size=(25, 5))],
     [sg.Text('')]
 ]
 
 choose_algo_layout = [
-    [sg.Text('Wybierz algorytm'), sg.Combo(key='-ALGO-', values=list(algos.keys()), default_value=list(algos.keys())[0], size=(50, 10))],
+    [sg.Text('Wybierz algorytm'), sg.Combo(key='-ALGO-', values=list(algos.keys()), default_value=list(algos.keys())[0], size=(50, 5))],
     [sg.Text('')]
 ]
 
@@ -75,17 +75,17 @@ create_rank_layout = [
 
 alternatives_layout = [
     [sg.Text('Alternatywy z kryteriami', justification='center')],
-    [sg.Table([], headings=list_k,key='-TABLE_KRYT-', num_rows=10, max_col_width = 5, auto_size_columns=True, vertical_scroll_only=False, justification='center', expand_x=True, expand_y=True)]
+    [sg.Table([], headings=list_k,key='-TABLE_KRYT-', num_rows=6, max_col_width = 5, auto_size_columns=True, vertical_scroll_only=False, justification='center', expand_x=True, expand_y=True)]
 ]
 
 disp_ranking_layout = [
     [sg.Text('Ranking',justification='center')],
-    [sg.Table([], result_headings, key='-TABLE_RANK-', num_rows=10, auto_size_columns=True)]
+    [sg.Table([], result_headings, key='-TABLE_RANK-', num_rows=6, auto_size_columns=True)]
 ]
 
 compare_layout = [
     [sg.Text('Wybierz algorytmy do porównania')],
-    [sg.Combo(key='-ALGO1-', values=list(algos.keys()), default_value=list(algos.keys())[0], size=(10, 1)), sg.Combo(key='-ALGO2-', values=list(algos.keys()), default_value=list(algos.keys())[0], size=(10, 1))],
+    [sg.Combo(key='-ALGO1-', values=list(algos.keys()), default_value=list(algos.keys())[0], size=(20, 1)), sg.Combo(key='-ALGO2-', values=list(algos.keys()), default_value=list(algos.keys())[0], size=(20, 1))],
     [sg.Text('')],
     [sg.Button('Porównaj rankingi',key='-COMPARE_RANKING-')]
 ]
