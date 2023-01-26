@@ -1,0 +1,48 @@
+Miasto,Nazwa kierunku,Nazwa uczelni,Procent zdawalności,Ocena absolwentów,Własna ocena sylabusa,Ilość semestrów,Próg rekrutacji,Rodzaj kierunku
+Kraków,Automatyka i Robotyka,Akademia Górniczo Hutnicza,92.04846359,5,2,7,94.0,tech
+Kraków,Recykling i Metalurgia,Akademia Górniczo Hutnicza,92.786748,4,5,7,30.1,tech
+Kraków,Inżynieria Mechatroniczna,Uniwersytet Rolniczy,96.69733882,2,4,7,21.7,tech
+Kraków,Zootechnika,Uniwersytet Rolniczy,80.00627311,2,4,6,21.7,tech
+Kraków,Browarnictwo i Słodownictwo,Uniwersytet Rolniczy,97.17969919,3,2,7,21.7,tech
+Kraków,Bioinformatyka,Uniwersytet Jagielloński,81.21259451,5,5,6,55.0,tech
+Kraków,Inżynieria Wzornictwa Przemysłowego,Politechnika Krakowska,86.24223431,5,5,7,59.5,tech
+Warszawa,Automatyka i Robotyka,Politechnika Warszawska,91.15708539,4,5,7,93.0,tech
+Warszawa,Lotnictwo i Kosmonautyka,Politechnika Warszawska,75.64410749,5,4,7,90.0,tech
+Warszawa,Inżynieria i Analiza danych,Politechnika Warszawska,78.63078603,4,2,7,80.34,tech
+Warszawa,Cyberbezpieczeństwo,Politechnika Warszawska,95.42408919,5,5,7,91.5,tech
+Wrocław,Automatyka i Robotyka,Politechnika Wrocławska,82.42889019,3,3,7,62.6,tech
+Wrocław,Informatyczne Systemy Automatyki,Politechnika Wrocławska,92.57353021,2,5,6,57.76,tech
+Wrocław,Inteligentna Elektronika,Politechnika Wrocławska,75.49627449,4,1,7,19.94,tech
+Wrocław,Budownictwo,Uniwersytet Przyrodniczy we Wrocławiu,95.51467071,5,3,6,57.64,tech
+Gdańsk,Projektowanie i Budowa Jachtów,Politechnika Gdańska,75.07251313,2,5,7,70.04,tech
+Gdańsk,Oceanotechnika,Politechnika Gdańska,81.52903617,4,4,7,35.64,tech
+Gdańsk,Korozja,Politechnika Gdańska,90.48359622,3,2,7,50.94,tech
+Gdańsk,Zielone Technologie,Politechnika Gdańska,91.4652168,2,5,6,25.4,tech
+Gdańsk,Hydrografia Morska,Uniwersytet Gdański,80.97250515,2,5,6,48.75,tech
+Poznań,Architektura,Politechnika Poznańska,89.1915867,5,5,7,57.2,tech
+Poznań,Sztuczna Inteligencja,Politechnika Poznańska,96.2254554,5,3,7,85.6,tech
+Poznań,Elektromobilność,Politechnika Poznańska,87.3249405,5,2,7,36.75,tech
+Poznań,Technologia Drewna,Uniwersytet Przyrodniczy,99.8155829,5,3,7,30.0,tech
+Poznań,Reżyseria Dźwięku,Uniwersytet im. Adama Mickiewicza,84.2708267,3,4,6,62.67,tech
+Poznań,Astronomia,Uniwersytet im. Adama Mickiewicza,99.421992,1,3,6,60.7,tech
+Katowice,Automatyka i Robotyka,Politechnika Śląska,98.2483966,3,5,7,63.5,tech
+Katowice,Energetyka,Politechnika Śląska,99.247042,2,3,7,35.2,tech
+Katowice,Mechatronika,Politechnika Śląska,99.5274237,4,4,7,73.2,tech
+Katowice,Biotechnologia,Politechnika Śląska,99.5034973,3,5,7,82.4,tech
+Katowice,Inżynieria biomedyczna,Politechnika Śląska,97.7124689,5,4,7,92.5,tech
+Katowice,Logistyka,Politechnika Śląska,96.7578624,1,2,6,35.2,tech
+łódź,Energetyka,Politechnika łódzka,99.5092136,1,5,7,67.2,tech
+łódź,Budownictwo,Politechnika łódzka,98.3522825,5,3,7,78.9,tech
+łódź,Mechanika i Budowa Maszyn,Politechnika łódźka,93.9955249,5,3,7,81.5,tech
+łódź,Mechatronika,Politechnika łódźka,99.7089103,2,5,7,68.5,tech
+łódź,Elektronika i Telekomunikacja,Politechnika łódźka,92.1846063,1,5,7,72.8,tech
+łódź,Automatyka i Robotyka,Politechnika łódźka,99.7776686,1,2,7,67.9,tech
+Rzeszów,Automatyka i Robotyka,Politechnika Rzeszowska,95.5524501,1,1,7,91.0,tech
+Rzeszów,Elektrotechnika,Politechnika Rzeszowska,90.9502171,3,4,7,42.0,tech
+Rzeszów,Inżynieria farmaceutyczna,Politechnika Rzeszowska,92.078669,1,2,7,92.0,tech
+Rzeszów,Mechatronika,Politechnika Rzeszowska,86.7577871,1,5,7,53.0,tech
+Rzeszów,Informatyka,Uniwersytet Rzeszowski,87.6380316,5,5,7,91.0,tech
+Rzeszów,Inżynieria Materiałowa,Uniwersytet Rzeszowski,99.8280459,5,5,7,36.0,tech
+Rzeszów,Budownictwo,Politechnika Rzeszowska,97.7517685,5,5,7,66.0,tech
+Rzeszów,Lotnictwo i Kosmonautyka,Politechnika Rzeszowska,99.5087651,5,5,7,40.0,tech
+Rzeszów,Inżynieria Materiałowa,Politechnika Rzeszowska,75.5732284,1,4,7,40.0,tech

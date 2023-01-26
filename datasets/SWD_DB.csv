@@ -1,0 +1,123 @@
+Miasto,Nazwa kierunku,Nazwa uczelni,Procent zdawalności,Ocena absolwentów,Własna ocena sylabusa,Ilość semestrów,Próg rekrutacji,Rodzaj kierunku
+Kraków,Automatyka i Robotyka,Akademia Górniczo Hutnicza,"92.04846359",5,2,7,94,tech
+Kraków,Kulturoznawstwo,AKADEMIA IGNATIANUM,"84.81862478",5,5,6,33.8,hum
+Kraków,Recykling i Metalurgia,Akademia Górniczo Hutnicza,"92.786748",4,5,7,30.1,tech
+Kraków,Inżynieria Mechatroniczna,Uniwersytet Rolniczy,"96.69733882",2,4,7,	21.7,tech
+Kraków,Etologia i Psychologia Zwierząt,Uniwersytet Rolniczy,"95.27443724",2,3,6,43.4,hum
+Kraków,Zootechnika,Uniwersytet Rolniczy,"80.00627311",2,4,6,21.7,tech
+Kraków,Browarnictwo i Słodownictwo,Uniwersytet Rolniczy,"97.17969919",3,2,7,21.7,tech
+Kraków,Bioinformatyka,Uniwersytet Jagielloński,"81.21259451",5,5,6,55,tech
+Kraków,Filologia Węgierska,Uniwersytet Jagielloński,"98.2589938",3,5,6,41.5,hum
+Kraków,Studia Europejskie,Uniwersytet Jagielloński,"95.45174278",4,5,6,60,hum
+Kraków,Relacje Międzykulturowe,Uniwersytet Jagielloński,"97.42798958",4,3,6,65,hum
+Kraków,Region karpacki: etnolingwistyka i studia kulturowe,Uniwersytet Jagielloński,"98.71287256",2,1,6,	66.75,hum
+Kraków,Wiedza o Teatrze,Uniwersytet Jagielloński,"96.16222266",5,2,6,40,hum
+Kraków,Inżynieria Wzornictwa Przemysłowego,Politechnika Krakowska,"86.24223431",5,5,7,59.5,tech
+Kraków,Turystyka Przygodowa,Akademia Wychowania Fizycznego,"91.31668911",2,3,6,90,hum
+Warszawa,Automatyka i Robotyka,Politechnika Warszawska,"91.15708539",4,5,7,93,tech
+Warszawa,Lotnictwo i Kosmonautyka,Politechnika Warszawska,"75.64410749",5,4,7,90,tech
+Warszawa,Inżynieria i Analiza danych,Politechnika Warszawska,"78.63078603",4,2,7,80.34,tech
+Warszawa,Cyberbezpieczeństwo,Politechnika Warszawska,"95.42408919",5,5,7,91.5,tech
+Warszawa,Filozofia,Uniwersytet Warszawski,"97.48580359",3,4,6,62.12,hum
+Warszawa,Socjologia,Uniwersytet Warszawski,"96.91898357",3,2,6,67,hum
+Warszawa,Kognitywistyka,Uniwersytet Warszawski,"98.30123941",4,4,6,65.47,hum
+Warszawa,Psychologia,Uniwersytet Warszawski,"98.15315658",2,4,6,77.25,hum
+Warszawa,Matematyka,Uniwersytet Warszawski,"78.78071346",3,4,6,77,sci
+Warszawa,Prawo,Uniwersytet Warszawski,"97.51042365",5,5,6,73.26,hum
+Warszawa,Kierunek Lekarski,Warszawski Uniwersytet Medyczny,"96.23024254",5,3,12,94,lek
+Warszawa,Fizjoterapia,Warszawski Uniwersytet Medyczny,"97.88327926",2,1,10,85.2,lek
+Warszawa,Kierunek Lekarsko-Dentystyczny,Warszawski Uniwersytet Medyczny,"98.12267315",4,2,10,93.5,lek
+Warszawa,SGH,Szkoła Główna Handlowa,"95.04405362",3,3,6,25.1,ekon
+Warszawa,Teologia,Chrześcijańska Akademia Teologiczna,"90.29165091",5,4,6,27.3,hum
+Wrocław,Automatyka i Robotyka,Politechnika Wrocławska,"82.42889019",3,3,7,62.6,tech
+Wrocław,Informatyczne Systemy Automatyki,Politechnika Wrocławska,"92.57353021",2,5,6,57.76,tech
+Wrocław,Inteligentna Elektronika,Politechnika Wrocławska,"75.49627449",4,1,7,19.94,tech
+Wrocław,Kosmetologia,Akademia Wychowania Fizycznego we Wrocławiu,"98.54115189",5,3,6,15.33,sport
+Wrocław,Sport(Menadżer),Akademia Wychowania Fizycznego we Wrocławiu,"89.96965643",5,4,6,30,sport
+Wrocław,Zootechnika,Uniwersytet Przyrodniczy we Wrocławiu,"98.67710263",4,3,6,45.3,sci
+Wrocław,Budownictwo,Uniwersytet Przyrodniczy we Wrocławiu,"95.51467071",5,3,6,57.64,tech
+Wrocław,Technologia i Organizacja Gastronomii,Uniwersytet Przyrodniczy we Wrocławiu,"97.74654386",1,5,6,52.4,sci
+Wrocław,Kierunek lekarski,Uniwersytet Medyczny we Wrocławiu,"82.20281832",3,5,12,83.4,lek
+Wrocław,Kierunek Lekarsko-Dentystyczny,Uniwersytet Medyczny we Wrocławiu,"98.44316292",5,5,10,81.3,lek
+Wrocław,Położnictwo,Uniwersytet Medyczny we Wrocławiu,"82.75093491",3,3,6,20.45,lek
+Wrocław,Archeologia,Uniwersytet Wrocławski,"95.92674617",1,5,6,10.4,hum
+Wrocław,Psychologia,Uniwersytet Wrocławski,"97.29986601",4,3,6,85.46,hum
+Wrocław,Prawo,Uniwersytet Wrocławski,"97.92056311",3,5,6,60.4,hum
+Wrocław,Dowodzenie- Studia Wojskowe,Akademia Wojsk Lądowych im. gen. Tadeusza Kościuszki,"93.77414671",3,2,10,45.3,wojs
+Gdańsk,Projektowanie i Budowa Jachtów,Politechnika Gdańska,"75.07251313",2,5,7,70.04,tech
+Gdańsk,Oceanotechnika,Politechnika Gdańska,"81.52903617",4,4,7,35.64,tech
+Gdańsk,Korozja,Politechnika Gdańska,"90.48359622",3,2,7,50.94,tech
+Gdańsk,Zdrowie Publiczne,Wyższa Szkoła Zdrowia,"95.34700477",2,5,6,77,lek
+Gdańsk,Iberystyka,Uniwersytet Gdański,"97.83726081",2,1,6,85.5,hum
+Gdańsk,Slawistyka,Uniwersytet Gdański,"95.76322562",2,2,6,51.6,hum
+Gdańsk,Rosjoznastwo,Uniwersytet Gdański,"95.09106615",2,4,6,70.5,hum
+Gdańsk,Praca Socjalna,Uniwersytet Gdański,"79.43283675",2,4,10,78.4,hum
+Gdańsk,Zielone Technologie,Politechnika Gdańska,"91.4652168",2,5,6,25.4,tech
+Gdańsk,Etnofilologia Kaszubska,Uniwersytet Gdański,"96.2104403",2,5,6,75.3,hum
+Gdańsk,Filologia Romańska,Uniwersytet Gdański,"92.42729554",2,5,6,71.8,hum
+Gdańsk,Sprawność Fizyczna w Siłach Specjalnych,Akademia Wychowania Fizycznego i Sportu,"79.8802676",2,5,6,21.4,wojs
+Gdańsk,Kryminologia,Uniwersytet Gdański,"95.82760951",2,4,6,89.9,hum
+Gdańsk,Administracja,Uniwersytet Gdański,"97.63274392",2,4,6,70.2,ekon
+Gdańsk,Hydrografia Morska,Uniwersytet Gdański,"80.97250515",2,5,6,48.75,tech
+Poznań,Architektura,Politechnika Poznańska,"89.1915867",5,5,7,57.2,tech
+Poznań,Sztuczna Inteligencja,Politechnika Poznańska,"96.2254554",5,3,7,85.6,tech
+Poznań,Elektromobilność,Politechnika Poznańska,"87.3249405",5,2,7,36.75,tech
+Poznań,Technologia Drewna,Uniwersytet Przyrodniczy,"99.8155829",5,3,7,30,tech
+Poznań,Weterynaria,Uniwersytet Przyrodniczy,"96.1460395",5,1,11,74,lek
+Poznań,Groznawstwo,Uniwersytet im. Adama Mickiewicza,"99.8169652",4,5,6,59,hum
+Poznań,Reżyseria Dźwięku,Uniwersytet im. Adama Mickiewicza,"84.2708267",3,4,6,62.67,tech
+Poznań,Astronomia,Uniwersytet im. Adama Mickiewicza,"99.4219920",1,3,6,60.7,tech
+Poznań,Turkologia,Uniwersytet im. Adama Mickiewicza,"99.3856188",5,5,6,40,hum
+Poznań,Taniec w Kulturze Fizycznej,AWF im.Eugeniusza Piaseckiego,"91.9461229",4,3,6,35.78,hum
+Poznań,Fizjoterapia,AWF im.Eugeniusza Piaseckiego,"99.5567418",5,5,10,59,lek
+Poznań,Jakość i Rozwój Produktu,Uniwersytet Ekonomiczny,"76.5517505",5,4,7,45.5,ekon
+Poznań,Informatyka i Ekonometria	,Uniwersytet Ekonomiczny,"99.8010219",1,5,6,77.33,ekon
+Poznań,Kuratorstwo i Teorie Sztuki,Uniwersytet Artystyczny,"99.8193556",5,1,6,29.8,hum
+Poznań,Lekarsko-Dentystyczny,Uniwersytet Medyczny,"99.8038861",1,5,10,76,lek
+Lublin,Nauki o rodzinie,Katolicki Uniwersytet Lubelski Jana Pawła II,"99.7546929",5,5,6,17.25,hum
+Lublin,Teologia - grupa w języku angielskim (j. ang),Katolicki Uniwersytet Lubelski Jana Pawła II,"98.8437247",5,5,6,100,hum
+Katowice,Automatyka i Robotyka,Politechnika Śląska,"98.2483966",3,5,7,"63.5",tech
+Katowice,Energetyka,Politechnika Śląska,"99.2470420",2,3,7,"35.2",tech
+Katowice,Prawo,Uniwersytet Śląski ,"90.8779886",5,4,6,"85.2",spo
+Katowice,Socjologia,Uniwersytet Śląski ,"91.5907960",1,2,6,"5.2",spo
+Katowice,Dzienikarstwo i komunikacja,Uniwersytet Śląski ,"93.1657385",5,2,6,"3.2",spo
+Katowice,Gospodarka Przestrzenna,Uniwersytet Ekonimiczny w Katowicach,"78.6767848",2,3,6,"45.2",spo
+Katowice,Mechatronika,Politechnika Śląska,"99.5274237",4,4,7,"73.2",tech
+Katowice,Biotechnologia,Politechnika Śląska,"99.5034973",3,5,7,"82.4",tech
+Katowice,Inżynieria biomedyczna,Politechnika Śląska,"97.7124689",5,4,7,"92.5",tech
+Katowice,Logistyka,Politechnika Śląska,"96.7578624",1,2,6,"35.2",tech
+Katowice,Zarządzanie,Politechnika Śląska,"99.7517914",3,2,6,"48.1",ekon
+Katowice,Finanse i rachunkowość,Uniwersytet Ekonimiczny w Katowicach,"75.7817041",2,4,6,"25.8",ekon
+Katowice,Ekonomia,Uniwersytet Ekonimiczny w Katowicach,"99.2770944",3,3,6,"65.3",ekon
+Katowice,Międzynarodowe stosunki gospodarcze,Uniwersytet Ekonimiczny w Katowicach,"98.1497498",2,5,6,"37.5",ekon
+Katowice,Gospodarka cyfrowa,Uniwersytet Ekonomiczny,"99.1488098",5,4,7,45,ekon
+łódź,Energetyka,Politechnika łódzka,"99.5092136",1,5,7,"67.2",tech
+łódź,Budownictwo,Politechnika łódzka,"98.3522825",5,3,7,"78.9",tech
+łódź,Matematyka,Uniwersytet łódzki,"99.3778335",5,5,6,"44.9",sci
+łódź,Informatyka,Uniwersytet łódzki,"92.7524416",5,5,6,"49.1",ekon
+łódź,Ekonomia,Uniwersytet łódzki,"97.9596558",4,3,6,"59.9",ekon
+łódź,Inwestycje i Nieruchomości,Uniwersytet łódzki,"97.9981399",1,4,6,"67.5",ekon
+łódź,Fizyka,Uniwersytet łódzki,"96.5794735",5,5,6,"41.1",sci
+łódź,Archeologia,Uniwersytet łódzki,"79.6229469",3,2,6,"77.9",hum
+łódź,Historia,Uniwersytet łódzki,"99.6209207",3,3,6,"58.8",hum
+łódź,Kosmetologia,Uniwersytet Medyczny ,"97.6650426",5,4,6,100,lek
+łódź,Pielęgniarstwo,Uniwersytet Medyczny ,"90.2426734",5,1,6,"71.7",lek
+łódź,Mechanika i Budowa Maszyn,Politechnika łódźka,"93.9955249",5,3,7,"81.5",tech
+łódź,Mechatronika,Politechnika łódźka,"99.7089103",2,5,7,"68.5",tech
+łódź,Elektronika i Telekomunikacja,Politechnika łódźka,"92.1846063",1,5,7,"72.8",tech
+łódź,Automatyka i Robotyka,Politechnika łódźka,"99.7776686",1,2,7,"67.9",tech
+Rzeszów,Archeologia,Uniwersytet Rzeszowski,"98.0752697",3,2,6,46,hum
+Rzeszów,Biotechnologia,Politechnika Rzeszowska,"99.1280471",5,3,7,56,sci
+Rzeszów,Automatyka i Robotyka,Politechnika Rzeszowska,"95.5524501",1,1,7,91,tech
+Rzeszów,Elektrotechnika,Politechnika Rzeszowska,"90.9502171",3,4,7,42,tech
+Rzeszów,Inżynieria farmaceutyczna,Politechnika Rzeszowska,"92.0786690",1,2,7,92,tech
+Rzeszów,Mechatronika,Politechnika Rzeszowska,"86.7577871",1,5,7,53,tech
+Rzeszów,Informatyka,Uniwersytet Rzeszowski,"87.6380316",5,5,7,91,tech
+Rzeszów,Inżynieria Materiałowa,Uniwersytet Rzeszowski,"99.8280459",5,5,7,36,tech
+Rzeszów,Kulturoznawstwo,Uniwersytet Rzeszowski,"96.3624059",5,3,6,93,hum
+Rzeszów,Socjologia,Uniwersytet Rzeszowski,"93.3917098",4,5,6,85,hum
+Rzeszów,Administracja,Uniwersytet Rzeszowski,"99.5666389",5,5,6,33,hum
+Rzeszów,Budownictwo,Politechnika Rzeszowska,"97.7517685",5,5,7,66,tech
+Rzeszów,Lotnictwo i Kosmonautyka,Politechnika Rzeszowska,"99.5087651",5,5,7,40,tech
+Rzeszów,Inżynieria Materiałowa,Politechnika Rzeszowska,"75.5732284",1,4,7,40,tech
+Rzeszów,Biologia,Uniwersytet Rzeszowski,"99.3284243",5,4,6,64,sci
